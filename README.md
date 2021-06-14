@@ -17,5 +17,6 @@ This repository contains the basic configuration for a complete local environmen
 - Copy the content from `project/.gitignore` and paste it in the root's folder `.gitignore`
 - Remove `project` folder (not needed anymore)
 - Navigate to `localhost:1000` so you can see the Symfony welcome page :)
+- Insert phpunit testing with composer 'composer require --dev phpunit/phpunit symfony/test-pack'
 
 Happy coding!
