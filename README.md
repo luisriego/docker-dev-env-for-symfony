@@ -21,3 +21,7 @@ This repository contains the basic configuration for a complete local environmen
 - Insert phpunit testing with composer 'composer require --dev phpunit/phpunit symfony/test-pack'
 
 Happy coding!
+
+### Problems
+- Run `sf d:m:m -n --env=test` to apply migrations on test enviroment
+
