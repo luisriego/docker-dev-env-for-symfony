@@ -32,27 +32,54 @@ services:
       XDEBUG_CLIENT_HOST: 172.17.0.1
       XDEBUG_CLIENT_PORT: 9003
       PHP_IDE_CONFIG: serverName=docker-dev-env-for-symfony
+    ports:
+      - '1000:8000'
+    networks:
+      - docker-dev-env-for-symfony-network
+  depends_on:
+      - docker-dev-env-for-symfony-postgres
+      
+  docker-dev-env-for-symfony-postgres:
+    container_name: docker-dev-env-for-symfony-postgres
+    image: postgres:14-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: passwd
+      POSTGRES_DB: postgres_symfony
+    volumes:
+      - docker-dev-env-for-symfony-pgsql-data:/var/lib/postgresql/data
     networks:
       - docker-dev-env-for-symfony-network
 
-  docker-dev-env-for-symfony-db:
-    container_name: docker-dev-env-for-symfony-db
-    build:
-      context: ./docker/database
+  docker-dev-env-for-symfony-mysql:
+    container_name: docker-dev-env-for-symfony-mysql
+    image: mysql:8.0.26
     ports:
-      - 10000:3306
+      - '3336:3306'
     environment:
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: mysql_symfony
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      - docker-dev-env-for-symfony-db-data:/var/lib/mysql
+      - docker-dev-env-for-symfony-mysql-data:/var/lib/mysql
     networks:
       - docker-dev-env-for-symfony-network
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+
+  codenip-php81-symfony54-rabbit:
+    container_name: codenip-php81-symfony54-rabbitmq
+    image: rabbitmq:3-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - codenip-php81-symfony54-network
 
 volumes:
+  docker-dev-env-for-symfony-pgsql-data:
   docker-dev-env-for-symfony-db-data:
 
 networks:
   docker-dev-env-for-symfony-network:
-    external: true
+#    external: true
