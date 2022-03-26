@@ -18,10 +18,17 @@ RUN apt update \
     && docker-php-ext-install intl pdo zip \
     # for MySQL
     && docker-php-ext-install pdo_mysql \
+    # for Postgres
+    && apt install -y libpq-dev \
+    && docker-php-ext-install pdo_pgsql \
+    # for RabbitMQ and XDEBUG
+    && docker-php-ext-install bcmath sockets \
+    && apt install -y librabbitmq-dev vim libssh-dev \
+    && pecl install xdebug amqp-1.11.0RC1 \
     # XDEBUG and APCu
     && pecl install xdebug apcu \
     # enable Docker extensions
-    && docker-php-ext-enable --ini-name 05-opcache.ini opcache xdebug apcu
+    && docker-php-ext-enable --ini-name 05-opcache.ini opcache xdebug amqp apcu
 
 # Install and update composer
 RUN curl https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
