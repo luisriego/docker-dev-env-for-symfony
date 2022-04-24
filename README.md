@@ -7,6 +7,7 @@ This repository contains the basic configuration for a complete local environmen
 - NGINX 1.19 container to handle HTTP requests
 - PHP 8.1.1 container to host your Symfony application
 - MySQL 8.0 container to store databases
+- Postgres 14 container to store databases
 
 (feel free to update any version in `Dockerfiles` and ports in `docker-compose.yml`)
 
