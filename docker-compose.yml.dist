@@ -67,8 +67,8 @@ services:
       - docker-dev-env-for-symfony-network
     command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
 
-  codenip-php81-symfony54-rabbit:
-    container_name: codenip-php81-symfony54-rabbitmq
+  docker-dev-env-for-symfony-rabbit:
+    container_name: docker-dev-env-for-symfony-rabbitmq
     image: rabbitmq:3-management-alpine
     ports:
       - '5672:5672'
