@@ -36,7 +36,7 @@ services:
       - '1000:8000'
     networks:
       - docker-dev-env-for-symfony-network
-  depends_on:
+    depends_on:
       - docker-dev-env-for-symfony-postgres
       
   docker-dev-env-for-symfony-postgres:
@@ -74,11 +74,11 @@ services:
       - '5672:5672'
       - '15672:15672'
     networks:
-      - codenip-php81-symfony54-network
+      - docker-dev-env-for-symfony-network
 
 volumes:
   docker-dev-env-for-symfony-pgsql-data:
-  docker-dev-env-for-symfony-db-data:
+  docker-dev-env-for-symfony-mysql-data:
 
 networks:
   docker-dev-env-for-symfony-network:
