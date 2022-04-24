@@ -33,7 +33,7 @@ services:
       XDEBUG_CLIENT_PORT: 9003
       PHP_IDE_CONFIG: serverName=docker-dev-env-for-symfony
     ports:
-      - '1000:8000'
+      - '1100:8000'
     networks:
       - docker-dev-env-for-symfony-network
     depends_on:
