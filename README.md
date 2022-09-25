@@ -15,7 +15,7 @@ This repository contains the basic configuration for a complete local environmen
 - Run `make build` to create all containers
 - Run `make start` to initiate all the containers
 - Enter the PHP container with `make ssh-be`
-- Install your favourite Symfony version with `composer create-project symfony/skeleton project [version (e.g. 5.2.*)]`
+- Install your favourite Symfony version with `composer create-project symfony/skeleton:"6.1.*" my_project_directory`
 - Move the content to the root folder with `mv project/* . && mv project/.env .`. This is necessary since Composer won't install the project if the folder already contains data.
 - Copy the content from `project/.gitignore` and paste it in the root's folder `.gitignore`
 - Remove `project` folder (not needed anymore)
@@ -26,7 +26,7 @@ This repository contains the basic configuration for a complete local environmen
 - Run `make start` to initiate all the containers
 - Enter the PHP container with `make ssh-be`
 - Check the requirements with `symfony check:requirements`
-- Install your favourite Symfony version with `symfony new --dir=project --version=lts --no-git`
+- Install your favourite Symfony version with `symfony new my_project_directory --version="6.1.*"`
   - the version options are: ('lts', 'stable', 'next' or 'previous'
   - the project skeleton options are: ('--demo', '--full', '--webapp' or nothing by the minimum installation)
 - Move the content to the root folder with `mv project/* . && mv project/.env .`. This is necessary since Composer won't install the project if the folder already contains data.
