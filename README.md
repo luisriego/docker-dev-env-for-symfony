@@ -55,3 +55,45 @@ Happy coding!
 ### For testing
 - Insert phpunit testing with composer 'composer require --dev phpunit/phpunit symfony/test-pack'
 - Run `sf d:m:m -n --env=test` to apply migrations on test enviroment
+
+composer dump-autoload --- when not found files after rename it
+
+If .pem has access problems: 'chmod 644 public.pem private.pem'
+
+#### To php cs-fixer
+to install:
+    
+    composer require --dev friendsofphp/php-cs-fixer
+to exec:
+
+    vendor/bin/php-cs-fixer fix src
+
+### SQL Try
+https://stackoverflow.com/questions/68380201/booking-system-using-query-builder-and-symfony
+
+```
+$subQueryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $subQuery = $subQueryBuilder
+            ->select('prop.id')
+            ->from('App:Reservation', 'reservation')
+            ->orWhere('reservation.startDate BETWEEN :checkInDate AND :checkOutDate')
+            ->orWhere('reservation.endDate BETWEEN :checkInDate AND :checkOutDate')
+            ->orWhere('reservation.startDate <= :checkInDate AND reservation.endDate >= :checkOutDate')
+            ->andWhere('reservation.confirmedAt IS NOT NULL')
+            ->andWhere('reservation.rating IS NULL')
+            ->innerJoin('reservation.property', 'prop')
+        ;
+        
+  $properties = $this->createQueryBuilder('p')
+        ->select('p')
+        ->andWhere('p.approved = 1')
+        ->andWhere($properties->expr()->notIn('p.id',  $subQuery->getDQL()))
+        ->andWhere('reservations.confirmedAt IS NOT NULL')
+        ->andWhere('reservations.rating IS NULL')
+        ->setParameter('checkInDate', new \DateTime($checkIn))
+        ->setParameter('checkOutDate', new \DateTime($checkOut))
+        ->innerJoin('p.reservations', 'reservations')
+        ->getQuery();
+```
+
+
