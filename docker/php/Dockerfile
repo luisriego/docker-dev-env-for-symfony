@@ -39,6 +39,8 @@ USER appuser
 RUN wget https://get.symfony.com/cli/installer -O - | bash
 USER root
 RUN mv /home/appuser/.symfony/bin/symfony /usr/local/bin/symfony
+# for symfony 5
+# RUN mv /home/appuser/.symfony5/bin/symfony /usr/local/bin/symfony
 
 # Install PHP-CS-FIXER
 RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
